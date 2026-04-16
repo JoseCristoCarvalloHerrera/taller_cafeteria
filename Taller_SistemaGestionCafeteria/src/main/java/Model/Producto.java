@@ -4,27 +4,30 @@ public class Producto {
     private String nombre;
     private double precio;
 
-    public Producto() {
-    }
-
     public Producto(String nombre, double precio) {
-        this.nombre = nombre;
-        this.precio = precio;
+        this.nombre = validarNombre(nombre);
+        this.precio = validarPrecio(precio);
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    private String validarNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del producto no puede estar vacio");
+        }
+        return nombre.trim();
+    }
+
+    private double validarPrecio(double precio) {
+        if (precio < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
+        return precio;
     }
 }

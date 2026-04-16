@@ -1,14 +1,10 @@
 package Model;
 
-public class Cliente
-{
+public class Cliente {
     private String nombre;
 
-    public Cliente() {
-    }
-
     public Cliente(String nombre) {
-        this.nombre = nombre;
+        this.nombre = validarNombre(nombre);
     }
 
     public String getNombre() {
@@ -16,6 +12,13 @@ public class Cliente
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = validarNombre(nombre);
+    }
+
+    private String validarNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del cliente no puede estar vacio");
+        }
+        return nombre.trim();
     }
 }
